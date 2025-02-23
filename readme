@@ -1,0 +1,16 @@
+# CI/CD Pipeline Demo
+
+Ce projet illustre un pipeline CI/CD automatisé avec GitHub Actions pour une application API REST simple.
+
+## Technologies utilisées
+- Python (Flask)
+- Docker
+- GitHub Actions
+- Heroku (ou autre service cloud)
+
+## Instructions
+1. Clonez ce dépôt.
+2. Lancez l’application localement :
+   ```bash
+   pip install -r requirements.txt
+   python app.py
