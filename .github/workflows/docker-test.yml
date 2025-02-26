@@ -1,13 +1,28 @@
-# Se connecter à Docker Hub
-- name: Log in to Docker Hub
-  uses: docker/login-action@v2
-  with:
-    username: ${{ secrets.DOCKER_HUB_USERNAME }}
-    password: ${{ secrets.DOCKER_HUB_TOKEN }}
+name: Test Docker Hub Login
 
-# Tester la connexion en listant les images Docker
-- name: Test Docker Hub Connection
-  run: |
-    echo "Testing Docker Hub connection..."
-    docker pull hello-world
-    docker images
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-docker-login:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Se connecter à Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      # Tester la connexion en listant les images Docker
+      - name: Test Docker Hub Connection
+        run: |
+          echo "Testing Docker Hub connection..."
+          docker pull hello-world
+          docker images
