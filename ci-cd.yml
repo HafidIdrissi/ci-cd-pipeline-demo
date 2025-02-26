@@ -55,7 +55,8 @@ jobs:
 
       # Publier l'image Docker (optionnel)
       - name: Push Docker image
-        run: docker push Test/ci-cd-demo
+        run: docker push hafezid/ci-cd-demo
+
 
   deploy-to-cloud:
     needs: build-docker-image
