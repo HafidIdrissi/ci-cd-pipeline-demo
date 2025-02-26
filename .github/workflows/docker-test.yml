@@ -1,16 +1,28 @@
-name: CI/CD Pipeline
+name: Test Docker Hub Login
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  test-docker-login:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Checkout du code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      # Se connecter à Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-    # Add other steps as needed
+      # Tester la connexion en listant les images Docker
+      - name: Test Docker Hub Connection
+        run: |
+          echo "Testing Docker Hub connection..."
+          docker pull hello-world
+          docker images
