@@ -51,11 +51,11 @@ jobs:
 
       # Construire l'image Docker
       - name: Build Docker image
-        run: docker build -t your-dockerhub-username/ci-cd-demo .
+        run: docker build -t hafezid/ci-cd-demo .
 
       # Publier l'image Docker (optionnel)
       - name: Push Docker image
-        run: docker push your-dockerhub-username/ci-cd-demo
+        run: docker push Test/ci-cd-demo
 
   deploy-to-cloud:
     needs: build-docker-image
